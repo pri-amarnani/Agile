@@ -32,4 +32,4 @@ jobs:
       - name: Run
         run: pytest test.py
       - name: Test
-        run: coverage test.py
+        run: coverage run -m pytest test.py
