@@ -19,12 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-
-      - name: Lint with ruff
+      - name: Install dependencies
         run: |
-          
-          ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
-          ruff --format=github --target-version=py37 .
+          python -m pip install --upgrade pip
+          pip install ruff pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: pylint
+        run:
+          pylint $(git ls-files '*.py')
       - name: Run
         run: python main.py
       - name: Test
